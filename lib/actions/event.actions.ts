@@ -30,8 +30,9 @@ const populateEvent = (query: any) => {
 // CREATE
 export async function createEvent({ userId, event, path }: CreateEventParams) {
   try {
+    
     await connectToDatabase()
-
+    
     const organizer = await User.findById(userId)
     if (!organizer) throw new Error('Organizer not found')
 
@@ -40,6 +41,7 @@ export async function createEvent({ userId, event, path }: CreateEventParams) {
 
     return JSON.parse(JSON.stringify(newEvent))
   } catch (error) {
+    console.log(error);
     handleError(error)
   }
 }
